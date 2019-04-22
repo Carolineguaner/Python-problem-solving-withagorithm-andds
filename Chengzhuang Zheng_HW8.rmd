@@ -1,0 +1,279 @@
+---
+title: "HW8"
+author: "chengzhuang Zheng"
+date: "2019/4/13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,fig.align = "center",fig.width = 10,fig.length = 18)
+```
+
+
+```{r}
+library(treemap)
+library(gplots)
+library(ggplot2)
+library(MASS)
+
+```
+
+###Exercise 1 :
+
+
+```{r}
+data(USArrests)
+data_ex1 = as.matrix(USArrests)
+heatmap.2(data_ex1,scale = "column",cexCol = 1.2 ,cexRow = 0.46,srtCol=0.5)
+
+
+
+```
+
+####Analysis:
+1)Comment on which states have higher and lower values of these statistics
+
+For murder rate, the folowing states have relatively higher murder rate  , Mississippi,Georgia,Louisiana,Alabama,Florida  and so on. Georgia state has the highest one. The folowing states have relatively lower murder rate, Maine, Rhode Island, Iowa,North Dakota, Vermont and so on. North Dakota has the lowest murder rate.
+
+For rape rate,the folowing states have relatively higher rape rate, Alaska,Nevada,Colorado,California, Michigan, Florida and so on.Nevada state has the highest one. The folowing states have relatively lower rape rate, Rhode Island, Maine,North Dakota, West Virginia, New Hampshire, Iowa and so on. North Dakota has the lowest rape rate.
+
+For assault rate,the following states have relatively higher assault rate, Florida, North Carolina, California, New Mexico, Arizona, Maryland and so on. North Carolina state has the highest assault rate. The following states have relatively lower assault rate, Vermont, North Dakota, Hawaii, Iowa, Wisconsin,New Hampshire and so on. North Dakota has the lowest assault rate.
+
+2)Comment on any apparent relationships between these crime rates and urban population
+Generally, those states with larger urban population tend to have higher crime rates. But some states are exceptions, like Alsak,Missipi,Connecticut,Ohio,Hawaii and so on. For Hawaii, its urban population is relatively higher, but its crime rate is comparatively lower.
+
+
+3)Comment on groups of states that are the most similar with respect to these statistics and groups of states that are very different with respect to this statistics.
+
+From the heatmap we could tell that,on the whole , it divide the states into three groups.
+
+For example,states listed in the middle(from Indiana to Vermont) , like South Dakota, Maine, West Virginia,North Dakota, Vermont,Iowa, New Hampshire and so on share similar statistics features. The states listed on the top(from Virginia to Missouri), Virginia, Oregon,New Jersey, Arkansas share similar statistics features.
+The states listed on the bottom(from Nevada to North Carolina), like Nevada,Illinois,Michigan share similar statistics feeatures.
+ 
+Those three groups are very different from each other with respect to this statistics.
+ 
+ 
+
+
+
+
+
+###Exercise 2 :
+
+
+```{r}
+
+data(state)
+data_ex2 = as.data.frame(data_ex1)
+data_ex2$region = state.region
+data_ex2$abb = state.abb
+
+treemap(data_ex2,
+
+        index=c("region","abb"),
+		#each cube size
+        vSize="UrbanPop",
+        vColor="Assault",
+        type="value")
+
+
+```
+####Analysis
+
+1)Comment on urban populations and assault rates by region and within region. What were the general differences between regions at the time? 
+
+At that time, for southern part of Unites States , the urban populations percentage was the highest, western part came the second and then north central part , and then  the north eastern part.
+For the assault rate, the assualt rate among all these four region had the same order as the urban popualtion feature. From the graph we could tell that , southern part had the highest assault rate and north eastern part had the lowest one.
+The south region had the highest assualt rate and urban populations percentage. 
+
+2)What were the differences within regions? 
+
+For south region, FL and NC had the highest assault rate. Only the WV state had assualt rate below 50. States like FL, TX,DE,OK had higher urban populations percentage and states like NC, MS,WV had lower urban populations percentage. The urban populations percentage varied greatly from different states.
+
+For west region, states like CA,HINV,AZ had higher urban populations percentage and states like ID,MT,AK had lower one.States like AZ,NM,CA, NV had higher assault rate and  states like HI,ID,MT had lower one.
+
+For north central region, states like IL, OH,MI had higher urban populations percentage and states like SD,ND had lower one. States like IL,MI had higher assault rate and states like WI, ND had lower one.
+
+For northwest region, NJ,RI,NY had the higher urban populations percentage and states like ME,VT had lower one. States like NY, RI had higher assault rate and states like VT, NH had lower one.
+
+Generally , the states with higher urban populations  percentage would had higher assault rate.
+
+
+3)Which states had the highest and lowest urban populations percentage and assault rates overall in 1973, and which were highest and lowest within regions.
+
+From the treemap above, we could know that, at that time, CA had the highest populations percentage and VT had the lowest populations percentage  among all the states. NC had the highest assault rate and ND had the lowest one overall.
+
+For south region, FL had the highest populations percentage and assault rate.WV had the lowest populations  percentage and assault rate. 
+
+For west region , CA had the highest populations  percentage and assault rate. AK had the lowest populations percentage . HI had the lowest assault rate.
+
+For north central region,IL had the highest populations percentage. MI had the highest assault rate.
+ND had the lowest populations percentage and assault rate.
+
+For northeast region, NJ had the highest populations percentage. NY had the highest assault rate.VT had the lowest assault populations percentage and assault rate.
+
+
+
+
+###Exercise 3 :
+
+```{r}
+treemap(data_ex2,
+
+        index=c("region","abb"),
+		#each cube size
+        vSize="Murder",
+        vColor="Assault",
+        type="value")
+
+
+
+```
+####Analysis:
+
+1)Comment on murder rates and assault rates by region and within region. What were the general differences between regions at the time? 
+
+At that time, for southern part of Unites States , the murder rates was the highest, western part came the second and then north central part , and then  the north eastern part.
+For the assault rate, the assualt rate among all these four region had the same order as the urban popualtion feature. From the graph we could tell that , southern part had the highest assault rate and north eastern part had the lowest one.
+The south region had the highest assualt rate and murder rates. 
+
+The south region had the highest assualt rate and murder rates. Its murder rates were almost the summation of the other three regions.
+
+2)What were the differences within regions? 
+For south region, states like  GA,MS,FL had higher murder rate. and states like OK,DE,WV  had lower murder rates. States like FL,NC,MD had higher assault rate and states like WV,KY  had lower one.
+
+For west region, States like  NV, NM,AK had lower murder rates and states like UT,WA,ID had the lower one.States like AZ,NM had higher assault rate and state HI had the lowest assault rate.
+
+For north central region, states like MI,IL,MO  had the higher murder rates and states like IA,ND had the lower murder rates. States like MI,IL had the higher assault rates and states like ND,WI.IA had lower one.
+
+For northeast region, NJ,PA,NY had the higher murder rates and states like ME,NH,VT had lower one. States like NY, RI had higher assault rate and states like VT, NH had lower one.
+
+Generally , the states with higher urban populations  percentage would had higher assault rate.
+
+
+3)Which states had the highest and lowest murder rates and assault rates overall in 1973, and which were highest and lowest within regions.
+
+From the treemap above, we could know that, at that time, GA had the highest murder rates and ND had the lowest murder rates among all the states. NC had the highest assault rate and ND had the lowest one overall.
+
+For south region, GA had the highest murder rates and WV had the lowst one.NC had the highest assault rate and state WV had lowest one.
+
+For west region , NV had the highest murder rates and ID had the lowest one.AZ had the highest assault rate and HI had the lowest one.
+
+
+For north central region,MI had the highest murder rates and ND had the lowest one. MI had the highest assault rate and ND had the lowest one.
+
+For northeast region, NY had the highest murder rates and NH had the lowest one. NY had the highest assault rate and VT had the lowest one.
+
+
+
+
+###Exercise 4 :
+
+```{r}
+#bandwidths
+band<-function(x)
+{
+  r <- quantile(x, c(0.25, 0.75))
+  h <- (r[2] - r[1])/1.34
+  4 * 1.06 * min(sqrt(var(x)), h) * length(x)^(-1/5)
+}
+
+
+
+####1) Murder rate and assault rate
+c(band(data_ex2$Murder),band(data_ex2$Assault))
+fit_4_1 = kde2d(data_ex2$Murder, data_ex2$Assault, h=c(6,130))
+
+contour(fit_4_1, col = topo.colors(10),xlab = "Murder Arrests(per 100,000)",ylab = "Assult Arrests(per 100,000)")
+title("Kernel Density Estimations between Murder Rate and Assault Rate")
+
+
+
+
+
+####2) Murder rate and urban population
+c(band(data_ex2$Murder),band(data_ex2$UrbanPop))
+fit_4_2 = kde2d(data_ex2$Murder, data_ex2$UrbanPop, h=c(6,22))
+contour(fit_4_2, col = topo.colors(10),xlab = " Murder arrests (per 100,000)",ylab ="Percent urban population")
+title("Kernel Density Estimations between Murder Rate and Urban populations")
+
+
+####3)Assault rate and urban population
+c(band(data_ex2$Assault),band(data_ex2$UrbanPop))
+fit_4_3 = kde2d(data_ex2$Assault, data_ex2$UrbanPop, h=c(130,25))
+
+
+contour(fit_4_3, col = topo.colors(10),xlab = " Assault arrests (per 100,000)",ylab ="Percent urban population")
+title("Kernel Density Estimations between Assault Rate and Urban populations")
+
+
+```
+
+
+
+####Analysis
+
+1)What the estimations tell us about more common magnitudes of the arrest rates and urban populations  at the time
+
+At that time, the more common magnitudes was assault rates around 110 to 150,percent urban populations around 60 to 70. The value for kernel density estimation was around 0.00011. 
+
+2)What the plots tell us about relationships between the arrest rates and between the arrest rates and urban population in 1973.
+
+The relationship between arrest rates: The higher the murder rates the higher arrest assaults rates would be. They were positively correlated.
+
+The relationship between the arrest rates and urban population: The most common magnitude was assault rates around 110 to 150,percent urban populations around 60 to 70 and murder rates around 5 to 7, urban population percent around 65 to 72.
+
+From the graph we could tell that there were weak linear relation between assault rates and urban population percentage, and  between murder rates and urban population percentage.  The arrest rates and murder rates were positively correlated with urban population percentage.
+
+
+###Exercise 5 :
+
+
+```{r}
+
+c(band(data_ex2$Murder),band(data_ex2$Assault))
+
+par(mfcol=c(2,2))
+
+
+for (reg in unique(data_ex2$region)){
+fit_ex5 = kde2d(data_ex2$Murder[data_ex2$region==reg], data_ex2$Assault[data_ex2$region==reg], h=c(6,130))
+
+contour(fit_ex5, col = topo.colors(10),xlab = "Murder Arrests(per 100,000)",ylab = "Assult Arrests(per 100,000)")
+title(paste(" Kernel Density Estimations of ",reg,"Region"),cex.main =1)
+}
+
+  
+    
+```
+
+####Analysis:
+
+1)Comment on how the arrest rates differ across regions 2)How the individual regions compare with the overall density estimation for murder and assault rates
+from Exercise 4.
+
+
+The south region had much higher attest rates than the other three regions.The most possible section was murder rates around 15 and assault rates around 220.
+Compared with overall density estimation, the positive correaltion still existed between assault and murder rates in south region but the more common magnitude were much higher.We could tell that the crimes to do with assault and murder were much severe in south region.
+
+The west region had two most common magnitude center, one was murder rates around 10 and assault rates around 260 and the other was murder rates around 4 and assault rates around 140. The second center was close to the center of overall graph but still a litte higher.
+We could tell that the most common arrest rates came the second among these four region.
+
+The arrest rates in north cental region were lower than south and west center, ranking the third highest among these four regions.The north central region had one most common  center, murder rates around 2.7 and assault rates around 75 which is lower than the most common center of overal kernel density estimation.
+
+The arrest rates in northeast region were the lowest among these four regions.The northeast region had one most common  center, murder rates around 2.5 and assault rates around 65 which is much lower than the most common center of overal kernel density estimation.We could tell that the crimes to do with assault and murder were much  better in the northeast region.
+
+
+
+
+####Reference:
+[1]Stat 480 Data Science Foundation lecture slides and code in visualization
+	
+
+
+
+
+
+
+
+
