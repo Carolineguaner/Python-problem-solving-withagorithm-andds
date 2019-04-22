@@ -17,6 +17,7 @@ library(ggplot2)
 library(MASS)
 
 ```
+gdfgs
 
 ###Exercise 1 :
 
